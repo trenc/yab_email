@@ -17,7 +17,7 @@ $plugin['name'] = 'yab_email';
 // 1 = Plugin help is in raw HTML.  Not recommended.
 # $plugin['allow_html_help'] = 1;
 
-$plugin['version'] = '0.5';
+$plugin['version'] = '0.6';
 $plugin['author'] = 'Tommy Schmucker';
 $plugin['author_uri'] = 'http://www.yablo.de/';
 $plugin['description'] = 'Simple Email Obfuscator/Defuscator (jQuery based)';
@@ -105,6 +105,7 @@ function yab_email($atts)
  * Dual licensed under the MIT and GPL licenses:
  * <http://www.opensource.org/licenses/mit-license.php>
  * <http://www.gnu.org/licenses/gpl.html>
+ * 24-09-12, modified for jQuery >= 1.8.0, Tommy Schmucker
  *
  * @param array class from $atts
  * @param boolean $set_js
@@ -125,7 +126,7 @@ function yab_email_javascript($atts, $set_js)
 <script>
 jQuery.fn.defuscate = function(settings){settings = jQuery.extend({link: true},settings);
 var regex = /\b([A-Z0-9._%-]+)\([^)]+\)((?:[A-Z0-9-]+\.)+[A-Z]{2,6})\b/gi;
-return this.each(function(){if($(this).is('a[@href]')){ $(this).attr('href', $(this).attr('href').replace(regex, '$1@$2'));var is_link = true;}
+return this.each(function(){if($(this).is('a[href]')){ $(this).attr('href', $(this).attr('href').replace(regex, '$1@$2'));var is_link = true;}
 $(this).html($(this).html().replace(regex, (settings.link && !is_link ? '<a href="mailto:$1@$2">$1@$2</a>' : '$1@$2')));});}
 </script>
 EOF;
