@@ -17,7 +17,7 @@ $plugin['name'] = 'yab_email';
 // 1 = Plugin help is in raw HTML.  Not recommended.
 # $plugin['allow_html_help'] = 1;
 
-$plugin['version'] = '0.6';
+$plugin['version'] = '0.7';
 $plugin['author'] = 'Tommy Schmucker';
 $plugin['author_uri'] = 'http://www.yablo.de/';
 $plugin['description'] = 'Simple Email Obfuscator/Defuscator (jQuery based)';
@@ -55,6 +55,13 @@ if (!defined('txpinterface'))
  * Version 3: http://www.gnu.org/licenses/gpl-3.0.html
  */
 
+if (class_exists('\Textpattern\Tag\Registry'))
+{
+	Txp::get('\Textpattern\Tag\Registry')
+		->register('yab_email')
+		->register('yab_email_javascript');
+}
+
 /**
  * Creates an obfuscated email adres
  *
@@ -66,17 +73,17 @@ function yab_email($atts)
 	extract(
 		lAtts(
 			array(
-				'email' => 'name@example.com',
-				'text' => '',
-				'class' => 'yab-email-link',
-				'at' => 'at',
-				'link' => 1,
+				'email'  => 'name@example.com',
+				'text'   => '',
+				'class'  => 'yab-email-link',
+				'at'     => 'at',
+				'link'   => 1,
 				'set_js' => 1
 			),$atts
 		)
 	);
 
-	$tmp = explode('@', $email);
+	$tmp   = explode('@', $email);
 	$email = yab_email_encode($tmp[0]).'(%20'.$at.'%20)'.yab_email_encode($tmp[1]);
 
 	if ($text)
@@ -117,7 +124,7 @@ function yab_email_javascript($atts, $set_js)
 		lAtts(
 			array(
 				'class' => 'yab-email-link',
-				'link' => 1
+				'link'  => 1
 			),$atts
 		)
 	);
