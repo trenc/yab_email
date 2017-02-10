@@ -2,7 +2,7 @@ h1. yab_email
 
 A simple email obfuscator/defuscator (jQuery based)
 
-*Version:* 0.6
+*Version:* 0.7
 
 h2. Table of contents
 
